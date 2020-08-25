@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import View, ListView, DetailView, CreateView, DeleteView
+from django.views.generic import View, ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.urls import reverse, reverse_lazy
+from .forms import MemoForm
 
 from .models import Memo
 
@@ -23,7 +24,8 @@ class MemoDetailView(DetailView):
 class MemoCreateView(CreateView):
     template_name = 'app/new_memo.html'
     model = Memo
-    fields = ("title", "text")
+    form_class = MemoForm
+    # fields = ("title", "text")
     # success_url = "/"
     def get_success_url(self):
         return reverse('app:detail', kwargs={'pk': self.object.pk})
@@ -31,3 +33,11 @@ class MemoCreateView(CreateView):
 class MemoDeleteView(DeleteView):
     model = Memo
     success_url = reverse_lazy('app:index')
+
+class MemoUpdateView(UpdateView):
+    template_name = "app/edit_memo.html"
+    # fields = ("title", "text")
+    form_class = MemoForm
+    model = Memo
+    def get_success_url(self):
+        return reverse('app:detail', kwargs={'pk': self.object.pk})

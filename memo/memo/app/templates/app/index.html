@@ -27,6 +27,7 @@
 				<th>title</th>
 				<th>create at</th>
 				<th></th>
+				<th></th>
 			</tr>
 			{% for memo in memos %}
 			<tr>
@@ -37,6 +38,11 @@
 				</td>
 				<td>{{memo.title}}</td>
 				<td>{{memo.created_datetime}}</td>
+				<td>
+					<a href="{% url 'app:edit' memo.id %}"
+						><button class="btn btn-primary">Edit</button></a
+					>
+				</td>
 				<td>
 					<form method="post" action="{% url 'app:delete' memo.id %}">
 						{% csrf_token %}
