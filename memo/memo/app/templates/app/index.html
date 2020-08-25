@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<title>Document</title>
+	</head>
+	<body>
+		<h1 class="navbar navbar-default">Top</h1>
+		<div class="text-right mb-3 mr-3">
+			<a href="{% url 'app:create' %}"
+				><button type="button" class="btn btn-secondary">
+					Create Memo
+				</button></a
+			>
+		</div>
+		<table class="table">
+			<tr>
+				<th>id</th>
+				<th>title</th>
+				<th>create at</th>
+				<th></th>
+			</tr>
+			{% for memo in object_list %}
+			<tr>
+				<td>
+					<a href="{% url 'app:detail' memo.id %}" class="btn btn-primary"
+						>{{ memo.id }}</a
+					>
+				</td>
+				<td>{{memo.title}}</td>
+				<td>{{memo.created_datetime}}</td>
+				<td>
+					<form method="post" action="">
+						<button type="submit" class="btn btn-primary">delete</button>
+					</form>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>
