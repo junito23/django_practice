@@ -7,9 +7,10 @@ from .models import Memo
 
 
 class MemoIndexView(ListView):
-    template_name = 'app/index.html'
+    template_name = 'index.html'
     model = Memo
     context_object_name = 'memos'
+    paginate_by = 5
     # def index(self, request):
     #     memos = Memo.objects.all().order_by('-created_datetime')
     #     return render(request, self.template_name, {'memos', memos})
@@ -17,12 +18,12 @@ class MemoIndexView(ListView):
         return Memo.objects.all().order_by('-created_datetime')
 
 class MemoDetailView(DetailView):
-    template_name = 'app/detail.html'
+    template_name = 'detail.html'
     model = Memo
 
 
 class MemoCreateView(CreateView):
-    template_name = 'app/new_memo.html'
+    template_name = 'new_memo.html'
     model = Memo
     form_class = MemoForm
     # fields = ("title", "text")
@@ -35,7 +36,7 @@ class MemoDeleteView(DeleteView):
     success_url = reverse_lazy('app:index')
 
 class MemoUpdateView(UpdateView):
-    template_name = "app/edit_memo.html"
+    template_name = "edit_memo.html"
     # fields = ("title", "text")
     form_class = MemoForm
     model = Memo
